@@ -2,16 +2,27 @@ package string_encryption;
 
 public class Encryption {
     public static String Encrypt(String str) {
-        boolean even = str.length() % 2 == 0;
-        StringBuilder out = new StringBuilder();
-        for (int i=0; i < str.length(); i++) {
-            if (i == str.length()-1) {
-                if(even) out.append(str.charAt(i)).append(str.charAt(0));
-                else out.append((char)((int) str.charAt(i) + (int) str.charAt(0)));
+        StringBuilder X=new StringBuilder();
+        for (int i=0;i<str.length();i++) {
+            if (i == str.length() - 1) {
+                int a = str.charAt(0);
+                int b = str.charAt(str.length() - 1);
+                char c = (char) (a + b);
+                X.append(c);
+            } else {
+                int a = str.charAt(i);
+                int b = str.charAt(i + 1);
+                char c = (char) (b + a);
+                X.append(c);
             }
-            else out.append((char)((int) str.charAt(i) + (int) str.charAt(i+1)));
         }
-        return out.toString();
+        if (str.length() %2==0){
+            String m=String.valueOf(str.charAt(0));
+            String n=String.valueOf(str.charAt(str.length() -1));
+            String o=X.substring(0,str.length() -1);
+            X=new StringBuilder(o + n + m);
+        }
+        return X.toString();
     }
 
     public static String Decrypt(String str) {

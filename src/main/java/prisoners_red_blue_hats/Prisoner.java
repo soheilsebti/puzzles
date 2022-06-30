@@ -95,14 +95,48 @@ public class Prisoner {
      */
     public HatColor guess(ArrayList<HatColor> observation,
                           ArrayList<HatColor> history) {
-        int frontReds = 0;
+        int frontR = 0;
         for (HatColor color : observation)
-            if (color.equals(HatColor.RED)) frontReds++;
+            if (color.equals(HatColor.RED)) frontR++;
 
-        int historyReds = 0;
+
+
+        int backR = 0;
         for (HatColor color : history)
-            if (color.equals(HatColor.RED)) historyReds++;
+            if (color.equals(HatColor.RED)) backR++;
 
-        return (frontReds + historyReds) % 2 == 0 ? HatColor.BLUE : HatColor.RED;
+
+
+        int frontB = 0;
+        for (HatColor color : observation)
+            if (color.equals(HatColor.BLUE)) frontB++;
+
+
+
+        int backB = 0;
+        for (HatColor color : history)
+            if (color.equals(HatColor.BLUE)) backB++;
+
+
+
+        if(history.size()==0 ) {
+            if ( frontB%2==0){
+                return HatColor.BLUE;
+            }
+            else {
+                return HatColor.RED;
+            }
+        }
+        else {
+            if ((frontB + backB) %2==0){
+                return HatColor.BLUE;
+
+            }
+            else {
+                return HatColor.RED;
+            }
+        }
     }
+
+
 }
